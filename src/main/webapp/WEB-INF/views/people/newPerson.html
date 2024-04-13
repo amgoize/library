@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New person</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #2b3459;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2b3459;
+        }
+
+    </style>
+</head>
+<body>
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
+    <label for="name">Enter name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color: cornflowerblue" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <br/>
+    <label for="surname">Enter surname</label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <div style="color: cornflowerblue" div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname error</div>
+    <br/>
+    <label for="patronymic">Enter patronymic</label>
+    <input type="text" th:field="*{patronymic}" id="patronymic"/>
+    <div style="color: cornflowerblue" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Patronymic error</div>
+    <br/>
+    <label for="year_of_birth">Enter year of birth</label>
+    <input type="text" th:field="*{yearOfBirth}" id="year_of_birth"/>
+    <div style="color: cornflowerblue" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">Year of birth error</div>
+
+    <br/>
+
+    <input type="submit" value="Create"/>
+</form>
+
+</body>
+</html>

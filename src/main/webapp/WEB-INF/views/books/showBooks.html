@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        a {
+            color: #b942af;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        a:hover {
+            background-color: #e7e7e7;
+        }
+
+        a[href$="books/new"] {
+            color: white;
+            background-color: #2f3d59;
+            text-align: center;
+            width: 200px;
+            display: block;
+            margin-top: 20px;
+        }
+
+        a[href$="books/new"]:hover {
+            background-color: #2b3459;
+        }
+    </style>
+
+</head>
+
+<body>
+<div th:each="book : ${books}">
+    <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getNameBook() + ', ' + book.getAuthor()
+    + ', ' + book.getYearOfBook}">Book</a>
+</div>
+</br>
+<a href="books/new">Create book</a>
+</body>
+</html>

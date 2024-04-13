@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #2b3459;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2b3459;
+        }
+
+    </style>
+</head>
+<body>
+<form th:method="POST" th:action="@{/books}" th:object="${book}">
+    <label for="name_book">Enter book`s name</label>
+    <input type="text" th:field="*{nameBook}" id="name_book"/>
+    <div style="color: cornflowerblue" th:if="${#fields.hasErrors('nameBook')}" th:errors="*{nameBook}">Book`s name error</div>
+    <br/>
+    <label for="author">Enter author`s name</label>
+    <input type="text" th:field="*{author}" id="author"/>
+    <div style="color: cornflowerblue" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author`s name error</div>
+    <br/>
+    <label for="year_of_book">Enter year of book</label>
+    <input type="text" th:field="*{yearOfBook}" id="year_of_book"/>
+    <div style="color: cornflowerblue" th:if="${#fields.hasErrors('yearOfBook')}" th:errors="*{yearOfBook}">Year of book error</div>
+
+    <br/>
+
+    <input type="submit" value="Create"/>
+</form>
+
+</body>
+</html>

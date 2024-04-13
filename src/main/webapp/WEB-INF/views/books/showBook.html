@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        p {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-top: 10px;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center; /* Center align form contents */
+        }
+
+        select, input[type="submit"] {
+            width: 20%; /* Reduce width to 50% */
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: inline-block; /* Make inline-block for alignment */
+        }
+
+        input[type="submit"] {
+            background-color: #4460a4;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2b3459;
+        }
+
+        .release-button {
+            background-color: #dc3545; /* Red for delete or release */
+        }
+
+        .release-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+<p th:text="${book.getNameBook()}">VALUE</p>
+<p th:text="${book.getAuthor()}">VALUE</p>
+<p th:text="${book.getYearOfBook()}">VALUE</p>
+<div th:if="${isBookAvailable}">
+    <form th:action="@{/books/assign/{id}(id=${book.id})}" method="post">
+        <select name="personId">
+            <option th:each="person : ${people}"
+                    th:value="${person.id}"
+                    th:text="${person.surname + ' ' + person.name + ' ' + person.patronymic}">Default Name</option>
+        </select>
+        <input type="submit" value="Assign book"/>
+    </form>
+</div>
+
+<div th:unless="${isBookAvailable}">
+    <form th:action="@{/books/release/{id}(id=${book.id})}" method="post">
+        <input type="submit" value="Release book"/>
+    </form>
+</div>
+<br>
+<hr>
+
+<form th:method="POST" th:action="@{/books/{id}(id=${book.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

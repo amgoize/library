@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Person</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        p {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2f3d59;
+        }
+
+        /* Стилизация формы на основе атрибута method */
+        form[method="post"] input[type="submit"] {
+            background-color: #2f3d59;
+        }
+
+        form[method="post"] input[type="submit"]:hover {
+            background-color: #2f3d59;
+        }
+
+        form[method="delete"] input[type="submit"], form[method="DELETE"] input[type="submit"] {
+            background-color: #dc3545;
+        }
+
+        form[method="delete"] input[type="submit"]:hover, form[method="DELETE"] input[type="submit"]:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+</head>
+<body>
+<p th:text="${person.getName()}">Имя</p>
+<p th:text="${person.getSurname()}">Фамилия</p>
+<p th:text="${person.getPatronymic()}">Отчество</p>
+<br/>
+
+<form th:method="POST" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>
